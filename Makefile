@@ -10,6 +10,7 @@ LFILE=librp_dds.a
 APPSOURCE=main.c
 
 all: $(LFILE)
+	cp $(DEPS) /usr/local/include/
 
 test: main.c $(LFILE)
 	$(CC) $< -L$(AROUTDIR) -lrp_dds
