@@ -30,6 +30,15 @@ int rp_dds_open(RP_DDS * rp_dds, off_t hardware_addr, int sys_clk_mhz)
 	  return EXIT_FAILURE;
 	}
 
+  // Initialize value.
+  uint32_t* pin = ((uint32_t*) (rp_dds->dds_cfg + 0));
+  rp_dds->pin0 = *(pin+0);
+  rp_dds->pin1 = *(pin+1);
+
+  uint32_t* asf = ((uint32_t*) (rp_dds->dds_cfg + 8));
+  rp_dds->asf0 = (uint16_t) ((*asf) & 0b1111111111);
+  rp_dds->asf1 = (uint16_t) (((*asf) >> 10) & 0b1111111111);
+
   return EXIT_SUCCESS;
 }
 
