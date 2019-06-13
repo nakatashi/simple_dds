@@ -1,7 +1,8 @@
 CC=gcc
 AR=ar
 ARFLAGS=rcs
-AROUTDIR=.
+# Place generated static library where linker will search for.
+AROUTDIR=/usr/local/lib/
 CFLAGS=-O3 -Wall
 DEPS=rp_dds.h
 LIBPREFIX=lib
@@ -20,7 +21,7 @@ app: $(APPSOURCE) $(LFILE)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(LIBPREFIX:=%.a): %.o
-	$(AR) $(ARFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $(AROUTDIR:=$@) $^
 
 #See Creating a shared and static library with the gnu compiler [gcc]
 
