@@ -42,6 +42,9 @@ int rp_dds_set_freq(RP_DDS * rp_dds, double freq0, double freq1)
   uint32_t pin0 = (uint32_t) (freq0 * (double) (pWidth / sys_clk));
   uint32_t pin1 = (uint32_t) (freq1 * (double) (pWidth / sys_clk));
 
+  rp_dds->pin0 = pin0;
+  rp_dds->pin1 = pin1;
+
   *(pin + 0) = pin0;
   *(pin + 1) = pin1;
   
@@ -51,12 +54,17 @@ int rp_dds_set_freq(RP_DDS * rp_dds, double freq0, double freq1)
 int rp_dds_set_ampl(RP_DDS * rp_dds, double ampl0, double ampl1)
 {
   // convert to 10bit 2's complementary
-  uint16_t asf0 = ((~((uint16_t) (ampl0 * (1 << 9)) )) & 0x3FF) + 0b0000000001;
-  uint16_t asf1 = ((~((uint16_t) (ampl1 * (1 << 9)) )) & 0x3FF) + 0b0000000001;
+  //uint16_t asf0 = ((~((uint16_t) (ampl0 * (1 << 9)) )) & 0x3FF) + 0b0000000001;
+  //uint16_t asf1 = ((~((uint16_t) (ampl1 * (1 << 9)) )) & 0x3FF) + 0b0000000001;
+  uint16_t asf0 = (uint16_t) (ampl0 * (1 << 9)) & 0x3FF;
+  uint16_t asf1 = (uint16_t) (ampl1 * (1 << 9)) & 0x3FF;
 
   uint32_t * asf = ((uint32_t*) ((rp_dds->dds_cfg) + 8));
   *(asf) = (asf0 | (asf1 << 10)) & 0xFFFFFFFF;
 
+  rp_dds->asf0 = asf0;
+  rp_dds->asf1 = asf1;
+  
   return EXIT_SUCCESS;
 }
 

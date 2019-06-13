@@ -12,8 +12,8 @@ typedef struct
   int mmapfd;
   volatile void *dds_cfg;
   int sys_clk_mhz;
-  double freq1_mhz, freq2_mhz;
-  double ampl0, ampl1;
+  uint32_t pin0, pin1;
+  uint16_t asf0, asf1;
 } RP_DDS;
 
 int rp_dds_open(RP_DDS * rp_dds, off_t hardware_addr, int sys_clk_mhz);
