@@ -3,6 +3,7 @@ AR=ar
 ARFLAGS=rcs
 # Place generated static library where linker will search for.
 AROUTDIR=/usr/local/lib/
+INCPATH=/usr/local/include/
 CFLAGS=-O3 -Wall
 DEPS=rp_dds.h
 LIBPREFIX=lib
@@ -10,7 +11,7 @@ LFILE=librp_dds.a
 APPSOURCE=main.c
 
 all: $(LFILE)
-	cp $(DEPS) /usr/local/include/
+	cp $(DEPS) $(INCPATH)
 
 test: main.c $(LFILE)
 	$(CC) $< -L$(AROUTDIR) -lrp_dds
