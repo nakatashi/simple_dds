@@ -1,5 +1,6 @@
 # Simple DDS controller
 RedPitaya上で実装したDDSのコントローラ。
+## インストール
 プロジェクトのルートで
 ```
 make
@@ -7,14 +8,19 @@ make
 を実行すると、
 "rp_dds.h"が/usr/local/include/に、"librp_dds.a"が/usr/local/lib/に配置される。
 
-生成したライブラリを使用したmain.cをコンパイルするには次を実行する。
+
+## 使用
+生成したライブラリを使用した、ソースコード(ここではmain.c)をコンパイルするには次を実行する。
 ```
 gcc -o main.out main.c -lrp_dds
 ```
 
-
+## サンプルプログラム
+main.cは動作確認用のプログラムデ、
 ```
 make test
 ```
-では、周波数25MHz、振幅係数0.4の出力を生成する実行ファイルを生成する。
+によりコンパイルされる。
+
+周波数25MHz、振幅係数0.4の出力を生成する。
 
