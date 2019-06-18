@@ -94,6 +94,11 @@ int rp_dds_close(RP_DDS * rp_dds)
 	  return EXIT_FAILURE;
 	}
 
-  close(rp_dds->mmapfd);
+  int result = close(rp_dds->mmapfd);
+  if(result < 0)
+	{
+	  perror("close failed");
+	  return EXIT_FAILURE;
+	}
   return EXIT_SUCCESS;
 }
